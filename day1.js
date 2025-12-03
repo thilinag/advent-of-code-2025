@@ -9,12 +9,12 @@ L1
 L99
 R14
 L82`,
-  answer: 0,
+  answer: 3,
 };
 
 const part2Data = {
   sample: part1Data.sample,
-  answer: 0,
+  answer: 6,
 };
 
 const sampleData = [part1Data, part2Data];

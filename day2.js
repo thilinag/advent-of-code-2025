@@ -2,12 +2,12 @@ const part1Data = {
   sample: `11-22,95-115,998-1012,1188511880-1188511890,222220-222224,
 1698522-1698528,446443-446449,38593856-38593862,565653-565659,
 824824821-824824827,2121212118-2121212124`,
-  answer: 0,
+  answer: 1227775554,
 };
 
 const part2Data = {
   sample: part1Data.sample,
-  answer: 0,
+  answer: 4174379265,
 };
 
 const sampleData = [part1Data, part2Data];
@@ -29,15 +29,15 @@ const part1 = () => {
     const [min, max] = line.split("-").map(Number);
     let current = min;
     while (current <= max) {
-      const curentStr = String(current);
+      const currentStr = String(current);
       current++;
-      if (curentStr.length % 2 !== 0) continue;
-      const mid = curentStr.length / 2;
-      const left = curentStr.slice(0, mid);
-      const right = curentStr.slice(mid);
+      if (currentStr.length % 2 !== 0) continue;
+      const mid = currentStr.length / 2;
+      const left = currentStr.slice(0, mid);
+      const right = currentStr.slice(mid);
 
       if (left === right) {
-        invalid.push(Number(curentStr));
+        invalid.push(Number(currentStr));
       }
     }
   });
@@ -54,10 +54,10 @@ const part2 = () => {
     const [min, max] = line.split("-").map(Number);
     let current = min;
     while (current <= max) {
-      const curentStr = String(current);
+      const currentStr = String(current);
       current++;
-      if (/^(.+)\1+$/.test(curentStr)) {
-        invalid.push(Number(curentStr));
+      if (/^(.+)\1+$/.test(currentStr)) {
+        invalid.push(Number(currentStr));
       }
     }
   });

@@ -3,12 +3,12 @@ const part1Data = {
 811111111111119
 234234234234278
 818181911112111`,
-  answer: 0,
+  answer: 357,
 };
 
 const part2Data = {
   sample: part1Data.sample,
-  answer: 0,
+  answer: 3121910778619,
 };
 
 const sampleData = [part1Data, part2Data];
