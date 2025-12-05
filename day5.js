@@ -76,6 +76,33 @@ const part2 = () => {
   return fresh;
 };
 
+const part1Optimised = () => {
+  const { ranges, ingradients } = getData(2);
+  ranges.sort((a, b) => a[0] - b[0]);
+  ingradients.sort((a, b) => a - b);
+  let fresh = 0;
+  let currentStart = ranges[0][0];
+  let currentEnd = ranges[0][1];
+
+  for (let i = 1; i < ranges.length; i++) {
+    const [nextStart, nextEnd] = ranges[i];
+    if (nextStart <= currentEnd) {
+      currentEnd = Math.max(currentEnd, nextEnd);
+    } else {
+      fresh += ingradients.filter(
+        (ingradient) => ingradient >= currentStart && ingradient <= currentEnd
+      ).length;
+      currentStart = nextStart;
+      currentEnd = nextEnd;
+    }
+  }
+
+  fresh += ingradients.filter(
+    (ingradient) => ingradient >= currentStart && ingradient <= currentEnd
+  ).length;
+  return fresh;
+};
+
 console.time("part1");
 const part1Answer = part1();
 console.log({ part1: part1Answer });
@@ -90,6 +117,12 @@ console.time("part2");
 const part2Answer = part2();
 console.log({ part2: part2Answer });
 console.timeEnd("part2");
+
+console.time("part1Optimised");
+const part1OptimisedAnswer = part1Optimised();
+console.log({ part1Optimised: part1OptimisedAnswer });
+console.timeEnd("part1Optimised");
+
 if (!isBrowser)
   console.assert(
     part2Answer === part2Data.answer,
