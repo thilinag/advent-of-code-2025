@@ -25,10 +25,10 @@ const getData = (part) => {
   const input = isBrowser
     ? document.body.innerText.trim()
     : sampleData[part - 1].sample;
-  const [rangesPart, ingradientsPart] = input.split("\n\n");
+  const [rangesPart, ingredientsPart] = input.split("\n\n");
   return {
     ranges: rangesPart.split("\n").map((range) => range.split("-").map(Number)),
-    ingradients: ingradientsPart.split("\n").map(Number),
+    ingredients: ingredientsPart.split("\n").map(Number),
   };
 };
 
@@ -36,11 +36,11 @@ const part1 = () => {
   const data = getData(1);
 
   /*
-   * Find all invalid ingradients that fall within any of the ranges
+   * Find all invalid ingredients that fall within any of the ranges
    */
-  const { ranges, ingradients } = data;
-  const fresh = ingradients.filter((ingradient) =>
-    ranges.some(([min, max]) => ingradient >= min && ingradient <= max)
+  const { ranges, ingredients } = data;
+  const fresh = ingredients.filter((ingredient) =>
+    ranges.some(([min, max]) => ingredient >= min && ingredient <= max)
   );
 
   return fresh.length;
@@ -77,9 +77,9 @@ const part2 = () => {
 };
 
 const part1Optimised = () => {
-  const { ranges, ingradients } = getData(2);
+  const { ranges, ingredients } = getData(2);
   ranges.sort((a, b) => a[0] - b[0]);
-  ingradients.sort((a, b) => a - b);
+  ingredients.sort((a, b) => a - b);
   let fresh = 0;
   let currentStart = ranges[0][0];
   let currentEnd = ranges[0][1];
@@ -89,16 +89,16 @@ const part1Optimised = () => {
     if (nextStart <= currentEnd) {
       currentEnd = Math.max(currentEnd, nextEnd);
     } else {
-      fresh += ingradients.filter(
-        (ingradient) => ingradient >= currentStart && ingradient <= currentEnd
+      fresh += ingredients.filter(
+        (ingredient) => ingredient >= currentStart && ingredient <= currentEnd
       ).length;
       currentStart = nextStart;
       currentEnd = nextEnd;
     }
   }
 
-  fresh += ingradients.filter(
-    (ingradient) => ingradient >= currentStart && ingradient <= currentEnd
+  fresh += ingredients.filter(
+    (ingredient) => ingredient >= currentStart && ingredient <= currentEnd
   ).length;
   return fresh;
 };
